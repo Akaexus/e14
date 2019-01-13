@@ -1,0 +1,5 @@
+select tytul, rok, ocena from filmy f join gatunki g on g.id=f.gatunki_id where g.nazwa = 'Komedia';
+
+select f.id, tytul, imie, nazwisko from filmy f join rezyserzy r on f.rezyserzy_id=r.id;
+
+select id, tytul from filmy where rok=2017 and ocena=6; -- wartość wynosi 6, pewnie chodziło o ocene
