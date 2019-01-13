@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pl" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Formatowanie</title>
+    <link rel="stylesheet" href="styl2.css">
+  </head>
+  <body>
+    <header class="baner">
+      <h1>Formatowanie dokumentów HTML</h1>
+    </header>
+    <div class="panelgorny">
+      <div>
+        <h2>Przykład list - hobby</h2>
+        <ul>
+          <li>muzyka</li>
+          <li>turystyka
+            <ol>
+              <li>góry</li>
+              <li>jeziora</li>
+              <li>na rowerze</li>
+            </ol>
+          </li>
+          <li>
+            książki
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h2>Przykład tabeli - rozkład dnia</h2>
+        <table>
+            <thead>
+              <tr>
+                <th>Pora dnia</th>
+                <th>obowiązki</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>rano</td>
+              <td>nauka</td>
+            </tr>
+            <tr>
+              <td>południe</td>
+              <td>zajęcia dodatkowe</td>
+            </tr>
+            <tr>
+              <td>popołudnie</td>
+              <td rowspan="2">moje hobby</td>
+            </tr>
+            <tr>
+              <td>wieczór</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <img src="napisy.png" alt="technologia web">
+      </div>
+    </div>
+    <div class="panel">
+      <p>
+        Podaj rozmiar tekstuw procentach <input id="size" type="number">%.
+      </p>
+      <p>
+        <select id="s">
+          <option value="normal">prosty</option>
+          <option value="italic">kursywa</option>
+        </select>
+      </p>
+      <p>
+        Jakim kolorem sformatować tekst? Wybierz przycisk.<br>
+        <button id="c1" class="c" data-color="red"></button>
+        <button id="c2" class="c" data-color="green"></button>
+        <button id="c3" class="c" data-color="blue"></button>
+      </p>
+      <p id="output">To jest przykład paragrafu, który może być dowolnie formatowany przez JavaScript</p>
+    </div>
+    <footer>
+      <p>Formatowaniem tekstu zajmował się: <i>00000000000</i></p>
+      <a href="//formatowanie.pl" target="_blank">Odwiedź także</a>
+    </footer>
+    <script>
+      /*
+      szybki alias funkcji, robi to samo
+      function $(id) {
+        return document.getElementById(id);
+      }
+       */
+      let $ = (e) => document.getElementById(e);
+
+      /*
+        document.querySelectorAll('.c')
+        zwraca liste elementów html po selektorze takim jak css
+        Array.from(document.querySelectorAll('.c')) zamienia to na tablice
+
+        .foreach((element)=>{
+
+        })
+        to pętla, która leci po każdym elemencie tablicy i przekazuje go do funkcji jako pierwszy argument
+       */
+
+      Array.from(document.querySelectorAll('.c')).forEach((element)=>{
+        /*
+          do każdego elementu dodaje event click
+          funkcja przekazywana przy wywołaniu eventu wysyła też na
+          pierwszy argumencie zmienną z informacjami dotyczącymi eventu,
+          w tym event.target, który jest elementem na który kliknelismy
+         */
+        element.addEventListener('click', (event)=> {
+          /*
+            każdy przycisk ma atrybut data-color w którym trzymany jest kolor,
+            atrybut można uzyskać przez event.target.dataset.color,
+            więcej informacji o datasets https://developer.mozilla.org/pl/docs/Learn/HTML/Howto/Use_data_attributes
+           */
+          let color = event.target.dataset.color;
+          let style = $('s').value;
+          let size = $('size').value;
+          let paragraph = $('output');
+          paragraph.style.fontSize = size+'%';
+          paragraph.style.color = color;
+          paragraph.style.fontStyle = style;
+
+        })
+      })
+
+    </script>
+  </body>
+</html>
